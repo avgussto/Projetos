@@ -1,0 +1,6 @@
+ultralytics
+opencv-python
+pytesseract
+pyttsx3
+pyaudio
+SpeechRecognition
