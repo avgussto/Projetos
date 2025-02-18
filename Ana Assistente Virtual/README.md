@@ -12,4 +12,4 @@ Este projeto foi uma ótima oportunidade para aprofundar meus conhecimentos em p
 
 Foi uma experiência rica de aprendizado, combinando diversas áreas da tecnologia e tornando a Ana uma assistente com bastante funcionalidade!
 
-
+OBS: É importante avisar que o código não funcionará sem o classificador, o que não posso disponibilizar pois eu o treinei com o meu rosto, então é importante criar o seu própio para que o código funcione. Quaisquer dúvidas me chame no LinkedIn!
