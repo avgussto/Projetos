@@ -18,7 +18,7 @@ def clicar_start(top,left,width,height):
     target_color_np = np.array((51, 51, 51)) # definindo a cor a ser buscada (cinza escuro)
     distance = np.linalg.norm(img1 - target_color_np, axis=2) # buscando a cor na array
     mask = distance <= 10 # definindo uma tolerância para as cores para não depender da qualidade do print
-    coords = np.argwhere(mask) # salvando as coordenadas da cor
+    cords = np.argwhere(mask) # salvando as coordenadas da cor
 
     if coords.size > 0:
         y_rel, x_rel = coords[0] # passando a primeira coordenada para levar o mouse
