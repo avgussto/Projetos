@@ -46,10 +46,9 @@ def coletar_numero(ocr_top,ocr_left,ocr_width,ocr_height):
         img2.save("ocr_debug.png") # salvando a imagem para debugar
 
     # Melhor psm + limpeza com regex
-    texto = pytesseract.image_to_string(img2, config='--psm 6 outputbase digits') # transcrevendo os números da imagem
-    texto = texto.replace("\n", "").replace(" ", "").strip() # removendo espaços e quebra de linhas
-    texto = re.sub(r'\D', '', texto) # garantindo que só tenham números na string
-
+    ocr = pytesseract.image_to_string(img2, config='--psm 6 outputbase digits') # transcrevendo os números da imagem
+    ocr_limpo = ocr.replace("\n", "").replace(" ", "").strip() # removendo espaços e quebra de linhas
+    ocr_final = re.sub(r'\D', '', ocr_limpo) # garantindo que só tenham números na string
 
 
     print('\n\nTexto extraído:')
