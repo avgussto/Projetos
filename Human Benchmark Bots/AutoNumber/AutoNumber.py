@@ -17,7 +17,7 @@ def clicar_start(top,left,width,height):
 
     target_color_np = np.array((51, 51, 51)) # definindo a cor a ser buscada (cinza escuro)
     distance = np.linalg.norm(img1 - target_color_np, axis=2) # buscando a cor na array
-    mask = distance <= 10 # definindo uma tolerância para as cores para não depender da qualidade do print
+    mask = distance <= 10 # definindo uma tolerância para atualizando o código cores para não depender da qualidade do print
     cords = np.argwhere(mask) # salvando as coordenadas da cor
 
     if cords.size > 0:
