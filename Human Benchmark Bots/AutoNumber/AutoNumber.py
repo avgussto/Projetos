@@ -50,10 +50,7 @@ def coletar_numero(ocr_top,ocr_left,ocr_width,ocr_height):
     ocr_limpo = ocr.replace("\n", "").replace(" ", "").strip() # removendo espaços e quebra de linhas
     ocr_final = re.sub(r'\D', '', ocr_limpo) # garantindo que só tenham números na string
 
-
-    print('\n\nTexto extraído:')
-    print(texto)
-    return texto # retornando a string com os números
+    return ocr_final # retornando a string com os números
 
 # função para digitar o número
 def digitar_numero(texto):
