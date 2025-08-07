@@ -53,7 +53,7 @@ def coletar_numero(ocr_top,ocr_left,ocr_width,ocr_height):
     return ocr_final # retornando a string com os números
 
 # função para digitar o número
-def digitar_numero(texto):
+def digitar_numero(ocr_final):
     global tempo # acessando a função de tempo
     time.sleep(tempo) # delay para dar tempod e digitar
     pyautogui.write(texto, interval=0.03) # escrevendo
