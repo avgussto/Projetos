@@ -20,8 +20,8 @@ def clicar_start(top,left,width,height):
     mask = distance <= 10 # definindo uma tolerância para as cores para não depender da qualidade do print
     cords = np.argwhere(mask) # salvando as coordenadas da cor
 
-    if coords.size > 0:
-        y_rel, x_rel = coords[0] # passando a primeira coordenada para levar o mouse
+    if cords.size > 0:
+        y_rel, x_rel = cords[0] # passando a primeira coordenada para levar o mouse
         x_click = left + x_rel
         y_click = top + y_rel
         print(f"Cor encontrada! Clicando em ({x_click}, {y_click})")
@@ -30,7 +30,7 @@ def clicar_start(top,left,width,height):
         print("Cor não encontrada.")
         exit() # encerrando o código caso a cor não seja encontrada
 
-# função para coletar os numeros
+# função para coletar os números
 def coletar_numero(ocr_top,ocr_left,ocr_width,ocr_height):
     time.sleep(0.5) # delay para garantir funcionamento
     with mss.mss() as sct:
