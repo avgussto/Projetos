@@ -24,7 +24,6 @@ def pegar_texto(top,left,width,height):
     texto_corrigido= re.sub(r'(^|\.\s+)\|', r'\1I', texto_limpo)
     texto_final = texto_corrigido[0].upper() + texto_corrigido[1:].strip()
 
-
     print(texto_final)
     return texto_final
 
@@ -35,7 +34,6 @@ def preparar_para_digitacao():
     texto = texto.encode('ascii', errors='ignore').decode('ascii')
     return texto
 
-
 def digitar_texto(texto):
     partes = re.split(r'(\?)', texto)
 
@@ -44,7 +42,6 @@ def digitar_texto(texto):
             keyboard.press_and_release('shift+/')
         else:
             pyautogui.write(parte)
-
 
 time.sleep(3)
 texto_final = preparar_para_digitacao()

@@ -76,7 +76,7 @@ clicar_start(154,46,1843,524)
 while continua:
 
     # coletando os números
-    texto = coletar_numero(140,90,1696,500)
+    texto = coletar_numero(160,90,1696,500)
 
     # digitando os números
     digitar_numero(texto)
@@ -88,5 +88,5 @@ while continua:
     ciclo += 1
 
     # cláusula para encerrar o loop
-    if ciclo > 40:
+    if ciclo > 42:
         continua = False
