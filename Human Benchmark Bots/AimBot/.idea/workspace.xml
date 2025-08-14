@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e51c3fb-5058-4029-836a-c37b93aa9daf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AimBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AimBot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/aimbot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/Digitacao.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/debug.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/digita.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Digitoide/teste.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
