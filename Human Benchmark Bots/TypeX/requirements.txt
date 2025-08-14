@@ -1,0 +1,7 @@
+mss
+pillow
+pyautogui
+keyboard
+pytesseract
+time
+re
