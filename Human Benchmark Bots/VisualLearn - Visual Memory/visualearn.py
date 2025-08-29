@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import mss
 import numpy as np
 import pyautogui
@@ -8,9 +10,7 @@ import time
 
 
 # Função para iniciar o teste de memória no site Human Benchmark
-def start_game(driver):
-
-    driver.get("https://humanbenchmark.com/tests/memory")  # abre o teste
+def start_game():
     time.sleep(3)  # espera a página carregar completamente
     pyautogui.click(x=950, y=580)  # clica no botão 'Start' (coordenadas da tela)
     time.sleep(1)  # espera o jogo iniciar
@@ -31,17 +31,19 @@ def capturar_frames(regiao_grade, duracao=1.0):
 
 # Função para obter as posições centrais dos quadrados da grade
 def get_grid_tiles(driver):
-
-    tiles_elements = driver.find_elements(By.CSS_SELECTOR, ".css-lxtdud.eut2yre1")
+    # Pega todos os quadrados pelo atributo style
+    tiles_elements = driver.find_elements(By.CSS_SELECTOR, "div[style*='width'][style*='height'][style*='border-radius']")
     grid = []
     ajuste_y = 130  # ajuste vertical para alinhar com a tela real
     for tile in tiles_elements:
-        location = tile.location  # posição do canto superior esquerdo
-        size = tile.size  # largura e altura do quadrado
-        center_x = int(location["x"] + size["width"] / 2)  # centro X
-        center_y = int(location["y"] + size["height"] / 2 + ajuste_y)  # centro Y com ajuste
+        location = tile.location
+        size = tile.size
+        center_x = int(location["x"] + size["width"] / 2)
+        center_y = int(location["y"] + size["height"] / 2 + ajuste_y)
         grid.append((center_x, center_y))
+
     return grid
+
 
 
 # Função para detectar quais quadrados "piscam" nos frames
@@ -68,9 +70,6 @@ def detectar_piscadas_por_frames(frames, tiles, regiao_grade, limiar_branco=200)
 
 # Função para clicar nos quadrados detectados
 def clicar_quadrados(quadrados):
-    """
-    Recebe uma lista de coordenadas e clica em cada uma usando pyautogui.
-    """
     for (x, y) in quadrados:
         pyautogui.click(x, y)
 
@@ -78,10 +77,14 @@ def clicar_quadrados(quadrados):
 # Configuração do driver do Chrome
 options = Options()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome(options=options)
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+driver.get("https://humanbenchmark.com/tests/memory")  # abre o teste
+time.sleep(90)
 # Inicia o teste
-start_game(driver)
+start_game()
 
 # Região da grade do jogo na tela
 regiao_grade = {'top': 280,
@@ -89,8 +92,9 @@ regiao_grade = {'top': 280,
                 'width': 899,
                 'height': 440}
 
-# Loop principal para jogar até 100 níveis
+# Loop principal para jogar até x níveis
 for nivel in range(1, 101):
+
     # Captura frames da região da grade
     frames = capturar_frames(regiao_grade, duracao=1.0)
 
@@ -107,3 +111,5 @@ for nivel in range(1, 101):
     clicar_quadrados(piscadas)
 
     time.sleep(2)  # espera carregar próximo nível
+
+time.sleep(190)

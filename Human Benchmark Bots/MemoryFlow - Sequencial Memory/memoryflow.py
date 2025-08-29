@@ -9,9 +9,6 @@ quadrados = [
     (812, 620), (969, 616), (1075, 618)
 ]
 
-# Coordenada do botão "Start" do jogo
-botao_iniciar = (968, 540)
-
 # Função para verificar se o quadrado está aceso (iluminado)
 def quadrado_aceso(posicao):
     r, g, b = pyautogui.screenshot().getpixel(posicao)
@@ -30,7 +27,7 @@ limite_espera = 1  # segundos
 time.sleep(3)
 
 # Clica no botão "Start" para iniciar o jogo
-pyautogui.click(*botao_iniciar)
+pyautogui.click(968, 550)
 
 nivel = 0  # contador de níveis completados
 

@@ -1,5 +1,5 @@
 import mss
-from PIL import Image, ImageFilter, ImageOps
+from PIL import Image
 import numpy as np
 import pyautogui
 import pytesseract
@@ -49,7 +49,7 @@ def coleta_palavra(top, left, width, height):
     return texto
 
 # Função principal para jogar o jogo de palavras
-def jogar(coord_seen, coord_new):
+def jogar(coord_seen, coord_new): 
     score = 0
     palavras_vistas = set()  # conjunto para armazenar palavras já vistas
     clicar_start(154, 46, 1843, 524)  # inicia o jogo

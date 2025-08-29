@@ -10,13 +10,12 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 
 # Região da tela onde o jogo aparece
 regiao_jogo = {
-    "top": 200,
-    "left": 500,
-    "width": 900,
-    "height": 600
+    "top": 160,
+    "left": 550,
+    "width": 850,
+    "height": 530
 }
 
-# Função para detectar números na tela usando OCR
 def detectar_numeros():
     with mss.mss() as sct:
         img = np.array(sct.grab(regiao_jogo))  # captura a região do jogo
@@ -34,24 +33,36 @@ def detectar_numeros():
 
     numeros = []
 
-    for cnt in contornos:
+    for i, cnt in enumerate(contornos):
         x, y, w, h = cv2.boundingRect(cnt)
 
         # Filtra retângulos com tamanho compatível com números
         if 20 < w < 150 and 20 < h < 150:
             roi = gray[y:y+h, x:x+w]
 
-            # OCR para reconhecer apenas dígitos
+            # Pré-processa ROI -> binariza + engrossa
+            roi_bin = cv2.threshold(roi, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+            kernel = np.ones((2,2), np.uint8)
+            roi_bin = cv2.dilate(roi_bin, kernel, iterations=1)
+
+            # OCR tentativa 1
             texto = pytesseract.image_to_string(
-                roi, config="--psm 10 -c tessedit_char_whitelist=0123456789"
-            )
+                roi_bin, config="--psm 7 -c tessedit_char_whitelist=0123456789"
+            ).strip()
+
             numero = ''.join(filter(str.isdigit, texto))
 
-            if numero.isdigit():
-                # Converte coordenadas relativas para absolutas na tela
-                abs_x = regiao_jogo["left"] + x + w // 2
-                abs_y = regiao_jogo["top"] + y + h // 2
-                numeros.append((int(numero), abs_x, abs_y))
+            # Se falhou, tenta outro modo
+            if not numero.isdigit():
+                texto = pytesseract.image_to_string(
+                    roi_bin, config="--psm 13 -c tessedit_char_whitelist=0123456789"
+                ).strip()
+                numero = ''.join(filter(str.isdigit, texto))
+
+            # Converte coordenadas relativas para absolutas na tela
+            abs_x = regiao_jogo["left"] + x + w // 2
+            abs_y = regiao_jogo["top"] + y + h // 2
+            numeros.append((int(numero), abs_x, abs_y))
 
     # Retorna a lista de números detectados ordenada
     return sorted(numeros)
@@ -75,7 +86,6 @@ def clicarbtn(top, left, width, height):
         y_rel, x_rel = coords[0]
         x_click = left + x_rel
         y_click = top + y_rel
-        print(f"Cor encontrada! Clicando em ({x_click}, {y_click})")
         pyautogui.click(x_click, y_click)
         time.sleep(0.5)
     else:
@@ -90,7 +100,7 @@ def main(nivel_max):
 
     while nivel_atual <= nivel_max:
         numeros = detectar_numeros()  # detecta os números na tela
-
+        
         if not numeros:  # se não encontrou números, espera e tenta de novo
             time.sleep(0.3)
             continue
@@ -98,13 +108,12 @@ def main(nivel_max):
         # Clica em todos os números detectados
         for _, x, y in numeros:
             pyautogui.click(x, y)
-
         nivel_atual += 1
 
         # Tenta clicar no continuar para avançar
         clicarbtn(**regiao_jogo)
 
 # Número de níveis que deseja jogar
-niveis_desejados = 5  # ajuste conforme necessidade
+niveis_desejados = 23  # ajuste conforme necessidade
 time.sleep(5)  # pausa antes de iniciar
 main(niveis_desejados)
